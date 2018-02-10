@@ -1,0 +1,127 @@
+\documentclass{letter}
+
+\usepackage[addressright]{vandyletter}
+
+
+\name{Your Name}
+\telephone{Phone: 615 555 5555}
+\email{your.name@vanderbilt.edu}
+\web{http://your.address.html}
+% Leave empty if you don't want an item,e.g.  \email{}
+% Use \address{row 1 \\ row 2 \\ row 3, etc...} if you want to override the default
+
+\begin{document}
+
+
+\begin{letter}{
+To: Economics Professors\\
+Calhoun Hall \\
+Vanderbilt University Econ Dept}
+
+\opening{
+Dear Colleagues,
+}
+
+
+Good news! I have managed to create a LaTeX package reproducing Vanderbilt
+Department of Economics's letterhead. It works under the LaTeX standard
+letter style. The only difference with the layout of the official letterhead
+is the addition of the words "Department of Economics" to the department
+address in the footer.
+
+I haven't tested all the options, please let me know if anything doesn't
+work as expected at my email andrea.moro@vanderbilt.edu. The package can be
+used with scientific word or any other pdfLaTeX compiler (see specific
+scientific word instructions below). The package distribution contains 5
+files: vandyletter.sty, cas04a.pdf, cas04acolor.pdf, vandyletter.tex and
+vandyletter.pdf. The first three files are necessary. File vandyletter.tex
+is this document, which you can use as a template, and vandyletter.pdf its
+pdf version. \bigskip
+
+\textbf{Style options}
+
+The package comes with the following options (see below how to set the
+options in Scientific Word)/ The default produces a color logo with address on the left.
+
+\textbf{[no-logo]} for printing on pre-printed letterhead\vspace{.8ex} \newline 
+\textbf{[addressright]} places your address to the right\vspace{.8ex} \newline 
+\textbf{[color-logo]} prints vb's logo with the standard gold-v acorn \vspace{.8ex} \newline 
+\textbf{[bw-logo]} prints vb's logo in black\vspace{.8ex} \newline 
+\textbf{[britdate]} prints date as day-month-year\vspace{.8ex} \newline 
+\textbf{[usesignature]} places the signature picture signature.jpg before your name
+at the end (you need to create and place this file in the same directory
+where your document is)\vspace{.8ex} \newline 
+\textbf{[nofoot]} doesn't print the department's address in the footer of the first
+page (all pages except the first will print a page number) \vspace{.8ex} \newline 
+\textbf{[printenvelope]}
+prints the address for an envelope \vspace{.8ex} \newline 
+\textbf{[printlabel]} prints the address on a separate page \vspace{.8ex} \newline 
+
+
+In the preamble of your file, you can specify the following (please see
+below for how to do this in Scientific Word):\newline
+\newline
+\texttt{\textbackslash name\{Sender's name\}} (required) \newline
+\texttt{\textbackslash telephone\{phone number\}} \newline
+\texttt{\textbackslash email\{email address\}}\newline
+\texttt{\textbackslash address\{address row 1 \textbackslash \textbackslash 
+address row 2 \textbackslash \textbackslash  address row 3\}}
+
+The declaration \textbackslash address, if present, supercedes 
+\textbackslash \textbackslash name \textbackslash \textbackslash 
+\\telephone \textbackslash \textbackslash email and can be used to change the
+default to any content you like.\bigskip
+
+\textbf{How to use this package with Scientific word}
+
+If you use scientific word, place the three files anywyere under the folder 
+\texttt{tcitex/tex/latex }of
+your scientific word folder (usually \texttt{c:/sw55} or \texttt{c:/swp55})
+(you may create a special folder if you wish). Place this file
+(vanderbilt.tex) in the directory where you save your letters, open it and
+modify it.
+
+1. The first thing you want to do after opening this file is modify the
+preamble with your name and numbers (make sure you don't remove any of the
+braces,or your letter will not compile). The preamble can be found under the
+menu \emph{typeset/preamble}. That's where you specify your name and
+numbers. If you like a different format, write it in the preamble using 
+\texttt{\textbackslash address\{row 1 
+ \textbackslash \textbackslash  row 2 \textbackslash \textbackslash 
+row 3\}}. Note that each row is separated by LaTeX's newline command, a
+double backslash.
+
+2. Next, click on the buttons "begin", "opening", and "closing" of this
+template and change to your liking. Don't remove the open and close braces.
+Under "begin", you can specify a subject line, under "opening" the opening
+of your letter, and under "closing", a greeting. If you don't want anything
+there, remove what's inside the braces but keep the declaration.
+
+As in any latex document,the date is set automatically, but you can remove
+it by typing change it by typing \texttt{\\date\{\}} in
+the preamble (see point 1), or change it by typing \texttt{
+date\{1/1/2009\}}.
+
+3. If you wish to change tha package options (for example, if you like the
+address to the left, or wich to print on actual letterhead without printing
+the logo - see above), the package options are set in scientific word as
+follows: \newline
+a. choose the menu \emph{typeset/options} and packages\newline
+b. select "\emph{vandyletter}" and click on "\emph{go native}" (don't click
+the "modify" button: it wont' work)\newline
+c. add the option names separated by commas in square brackets before
+\{vandyletter\}, e.g.\newline
+\texttt{[color-logo,addressright]\{vandyletter\}}
+
+4. Finally, compile the file using pdflatex, that is, use the "pdf" button
+to create a pdf directly.
+
+Enjoy! -- Andrea
+
+\closing{
+Sincerely,
+}
+
+\end{letter}
+
+\end{document}

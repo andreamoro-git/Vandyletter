@@ -1,0 +1,173 @@
+%% 2010/10/02 - default now color logo (Andrea Moro - andrea@andreamoro.net)
+%% 2009/09/13 - various mods to match Vanderbilt economics letterhead (Andrea Moro)
+%%
+%% modified from:
+%% suletter.sty - Stanford letterhead style (for letter class)
+%% 1995/10/23 - Convert to LaTeX2e, add Stanford logo
+%% 1999/11/29 - modified to make more general (Emma Pease)
+%% 2000/03/18 - added black and white logo option bw-logo (Christoper Manning)
+%% 2000/09/01 - put in no-logo and britdate options (Christopher Manning)
+
+% What the user can define:
+% \address{855 Serra Street\\ Stanford University\\ Stanford, CA 94305-4115}
+% \address supercedes \name \\ \telephone \\ \email
+% \emailadd
+% \telephone{phone number}  
+% \name{Sender's name}  required
+
+% Class options:
+% bw-logo: print the logo in black and white, not color
+% no-logo: include no logo for printing on real letterhead
+% nofoot: no address at bottom
+% addressright: Place your address indented to right with date, not on
+%               the left margin
+% britdate: format the address day month year, not month day, year
+% usesignature: add picture with scanned signature to the bottom
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{vandyletter}[2009/09/13 Vanderbilt Economics letterhead]
+\RequirePackage[pdftex]{graphicx}
+\RequirePackage{calc,fancyhdr}
+
+\newcommand*{\email}[1]{\def\emailadd{#1}}
+\newcommand*{\web}[1]{\def\webadd{#1}}
+\newcommand*{\fax}[1]{\def\faxnum{#1}}
+
+\email{enter.your@email.here.com}
+\web{www.vanderbilt.edu/econ}
+\fax{fax 615.343.8495}
+\location{}
+\def\envelopeadd{}
+\def\logo{                      %create Logo and from address
+\null\vspace{-1.7in}\begingroup
+\centerline{\vandylogo}
+ \hskip2.83in 
+\begin{minipage}{\textwidth} \vskip -0.1in
+  \footnotesize \textit {Department of Economics \\
+%   Box 1819-B\\
+ %  Nashville, Tn 37235  \\
+ %  (615) 322-2871
+ }
+\end{minipage}
+\vskip 0.3in
+\endgroup\par}
+
+\ifx\fromaddress\@empty         %create default address for top of page
+    \def\fromaddress{
+        \fromname  	
+        \ifx\telephonenum\@empty \else \\ \telephonenum \fi
+	 \ifx\emailadd\@empty \else \\ \emailadd\fi		
+	 \ifx\webadd\@empty \else \\ \webadd\fi			 
+}
+\fi
+
+\def\completeaddress{\hbox{\vtop{\hsize=.6\textwidth\rm%
+                   \fromaddress}}\hfill}
+
+% you might want to set this default depending on your printer
+\def\vandylogo{\hskip 0.3in\includegraphics[viewport=0 0 3.7in 0.8in,width=4.4in]{cas04acol.pdf}}
+
+\def\bottomaddress{
+       \hskip  3in
+	\parbox{3in} {
+	    \vspace{1in}
+	    \scriptsize\begin{tabbing}
+		 Department of Economics, \= VANDERBILT UNIVERSITY \vspace{.2em} \\		
+		%	VU Station B \#351819 m \= www.vanderbilt.edu/econ \kill
+			VU Station B \#351819 \> tel 615.322.2871 \\
+			415 Calhoun Hall \> fax 615.343.8495 \\
+			Nashville, Tn  37235-1819 \>  www.vanderbilt.edu/econ
+		\end{tabbing}		
+	}	
+}
+
+\DeclareOption{color-logo}{%mantained for compatibility 
+}
+\DeclareOption{bw-logo}{\def\vandylogo
+        {\hskip 0.3in\includegraphics[viewport=0 0 3.7in 0.8in,width=4.4in]{cas04abw.pdf}}
+}
+\DeclareOption{no-logo}{\def\logo{\null\vspace{-68.5pt}} \def\bottomaddress{}}
+\DeclareOption{addressright}{
+	\def\completeaddress{		
+			\hfill \parbox{0.5\textwidth}{\flushright\fromaddress}		
+			
+	}
+}
+\DeclareOption{britdate}{\renewcommand*{\today}{\number\day\space
+   \ifcase\month\or
+   January\or February\or March\or April\or May\or June\or
+   July\or August\or September\or October\or November\or December\fi
+   \space\number\year}}
+   
+\DeclareOption{nofoot}{
+    \def\bottomaddress{}	
+    \ifx\fromaddress\@empty         %create default address
+    \def\fromaddress{
+        \fromname  	
+        \fromaddress
+        \ifx\fromlocation\@empty \else \\ \fromlocation \fi
+        \ifx\telephonenum\@empty \else \\ \telephonenum \fi
+	 \ifx\emailadd\@empty \else \\ \emailadd\fi		
+	 \ifx\webadd\@empty \else \\ \webadd\fi			 
+}
+\fi
+}
+\DeclareOption{usesignature}{
+	\renewcommand{\closing}[1]{\par\nobreak\vspace{\parskip}%
+	  \stopbreaks
+	  \noindent
+	  \ifx\@empty\fromaddress\else
+	  \hspace*{\longindentation}\fi
+	  \parbox{1.2\indentedwidth}{\raggedright
+		   \ignorespaces  #1\\[\medskipamount]%
+		   \ifx\@empty\fromsig
+			   \includegraphics[width=1.5in]{signature.pdf}
+			   \newline \fromname
+		   \else \fromsig \fi\strut}%
+	   \par}
+}
+\DeclareOption{printenvelope}{
+ \def\envelopeadd{ \setcounter{page}{0} \makebox[0pt]{} \hfill \rotatebox{270}{\begin{minipage}{\maxof{3in}{\widthof{\toaddress}}}{\vspace{-0.5in} \large \toname \newline \toaddress}
+\end{minipage}  }
+}
+}
+\DeclareOption{printlabel}{
+    \def\envelopeadd{ 
+        \setcounter{page}{0} 
+        \hskip2.6in 
+        \begin{minipage}{3in}    
+            \vspace{-0.5in} \large \toname \\ \toaddress
+        \end{minipage}
+    }
+}
+\ProcessOptions
+% increase the indent for right stuff a little to 55%
+\longindentation=.65\textwidth
+\indentedwidth=\textwidth
+\advance\indentedwidth -\longindentation
+%-cm
+
+%customization for letter format
+\oddsidemargin 0.25in        % Left margin on odd-numbered pages.
+\evensidemargin 0.25in      % Left margin on even-numbered pages.
+\textwidth 6in
+\topmargin 0.25in
+\textheight 7in
+\footskip 1in
+
+
+\def\ps@headings{\renewcommand{\@oddfoot}{\bottomaddress}  }
+
+\def\@texttop{\vskip 0pt}
+\def\opening#1{
+  \thispagestyle{empty} \envelopeadd 
+  \newpage
+  \thispagestyle{headings}
+  \logo            %Create all up to start of text                                        
+   \vspace{12pt}
+   \completeaddress\par
+   \ifx\date\@empty \else \mbox{\@date} \par  \fi
+  {\raggedright \toname \\ \toaddress \par}%
+  \vspace{1.25\parskip}%
+  #1\par\nobreak
+}
