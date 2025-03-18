@@ -3,10 +3,10 @@
 \usepackage[addressright]{vandyletter}
 
 
-\name{Your Name}
+\name{My Name}
 \telephone{Phone: 615 555 5555}
-\email{your.name@vanderbilt.edu}
-\web{http://your.address.html}
+\email{my.name@vanderbilt.edu}
+\web{http://my.address.html}
 % Leave empty if you don't want an item,e.g.  \email{}
 % Use \address{row 1 \\ row 2 \\ row 3, etc...} if you want to override the default
 
@@ -24,9 +24,9 @@ Dear Colleagues,
 
 
 Good news! I have managed to create a \LaTeX\ package reproducing Vanderbilt
-Department of Economics's letterhead. It works adding the vandyletter package to a 
+Department of Economics's letterhead.  The Vandyletter package extends a 
 document with \LaTeX\ standard
-letter style.
+letter style of letter document class.
 
 I haven't tested all the combinations of options, please let me know if anything doesn't
 work as expected by sending me an email to andrea.moro@vanderbilt.edu. 
@@ -35,7 +35,10 @@ The package distribution contains 5
 files: vandyletter.sty, vandylogo.pdf, vandylogo-bw.pdf, vandyletter.tex and
 vandyletter.pdf. The first three files are necessary. File vandyletter.tex
 is this document, which you can use as a template, and vandyletter.pdf its
-pdf version. \bigskip
+compiled pdf version. Optionally, you can add a signature.pdf
+to the same directory where your document is, and use the [usesignature] option
+to add your signature at the end of the document, on top of your printed name. 
+ \bigskip
 
 \textbf{Style options}
 
@@ -43,10 +46,10 @@ The package comes with the following options. The default produces a color logo 
 
 \textbf{[no-logo]} for printing on pre-printed letterhead\vspace{.8ex} \newline 
 \textbf{[addressright]} places your address to the right\vspace{.8ex} \newline 
-\textbf{[color-logo]} prints vb's logo with the standard gold-v acorn \vspace{.8ex} \newline 
-\textbf{[bw-logo]} prints vb's logo in black\vspace{.8ex} \newline 
+\textbf{[color-logo]} prints vb's logo with the standard gold logo \vspace{.8ex} \newline 
+\textbf{[bw-logo]} prints vb's logo in grayscale\vspace{.8ex} \newline 
 \textbf{[britdate]} prints date as day-month-year\vspace{.8ex} \newline 
-\textbf{[usesignature]} places the signature picture signature.jpg before your name
+\textbf{[usesignature]} places the signature picture signature.pdf before your name
 at the end (you need to create and place this file in the same directory
 where your document is)\vspace{.8ex} \newline 
 \textbf{[nofoot]} doesn't print the department's address in the footer of the first
@@ -64,7 +67,7 @@ In the preamble of your file, you can specify the following:\newline
 \texttt{\textbackslash address\{address row 1 \textbackslash \textbackslash 
 address row 2 \textbackslash \textbackslash  address row 3\}}
 
-The declaration \textbackslash address, if present, supercedes 
+The declaration \textbackslash address, if present, overrides 
 \textbackslash \textbackslash name \textbackslash \textbackslash 
 \\telephone \textbackslash \textbackslash email and can be used to change the
 default to any content you like.\bigskip
